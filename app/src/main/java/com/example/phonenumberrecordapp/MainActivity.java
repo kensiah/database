@@ -8,9 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private Button btnAdd;
     private ListView listView;
+
+    private ContactsDBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,4 +37,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setUpDatabase(){
+        dbHelper = new ContactsDBHelper(this);
+    }
+
+    private void setUpAdapter(){
+        ArrayList<Contact> contactList = new ArrayList<>();
+        contactList = dbHelper.getAllContacts();
+
+        ContactsAdapter adapter = new ContactsAdapter(this,contactList);
+        listView.setAdapter(adapter);
+    }
+
 }
