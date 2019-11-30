@@ -39,6 +39,15 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
     }
 
     public void updateContact(Contact contact){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Contact.COLUMN_NAME, contact.getName());
+        values.put(Contact.COLUMN_PHONE_NUMBER,contact.getPhoneNumber());
+        db.update(Contact.TABLE_NAME,values,Contact.COLUMN_ID + " = ?",
+                new String[]{Integer.toString(contact.getId())});
+    }
+
+    public void deleteContact(Integer id){
 
     }
 }
