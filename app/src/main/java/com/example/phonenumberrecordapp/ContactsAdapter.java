@@ -38,7 +38,7 @@ public class ContactsAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        return super.getView(position, convertView, parent);
+        super.getView(position, convertView, parent);
         View v ;
         Viewholder holder;
         if(convertView == null){
