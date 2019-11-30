@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class Adapter extends ArrayAdapter {
+public class ContactsAdapter extends ArrayAdapter {
     private ArrayList<Contact> data;
     private Context context;
     private View v;
 
-    public Adapter(Context context, ArrayList<Contact> data){
+    public ContactsAdapter(Context context, ArrayList<Contact> data){
         super(context, R.layout.activity_save);
         this.data = data;
         this.context = context;

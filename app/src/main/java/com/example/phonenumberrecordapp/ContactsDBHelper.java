@@ -2,8 +2,11 @@ package com.example.phonenumberrecordapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 public class ContactsDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "MyDatabase.db";
@@ -48,6 +51,24 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
     }
 
     public void deleteContact(Integer id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(Contact.TABLE_NAME,Contact.COLUMN_ID + " = ?",
+                new String[] {Integer.toString(id)});
+    }
 
+    public ArrayList<Contact> getAllContacts(){
+        ArrayList<Contact> contactArrayList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + Contact.TABLE_NAME,null);
+        res.moveToFirst();
+
+        while(!res.isAfterLast()){
+            Contact contact = new Contact();
+            contact.setName(res.getString(res.getColumnIndex(Contact.COLUMN_NAME)));
+            contact.setPhoneNumber(res.getString(res.getColumnIndex(Contact.COLUMN_PHONE_NUMBER)));
+            contactArrayList.add(contact);
+        }
+        res.close();
+        return contactArrayList;
     }
 }
