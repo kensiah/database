@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViews();
         setListeners();
+        setUpDatabase();
+        setUpAdapter();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ContactsAdapter adapter = (ContactsAdapter) listView.getAdapter();
+        adapter.updateData(dbHelper.getAllContacts());
     }
 
     private void findViews(){
@@ -49,5 +58,7 @@ public class MainActivity extends AppCompatActivity {
         ContactsAdapter adapter = new ContactsAdapter(this,contactList);
         listView.setAdapter(adapter);
     }
+
+    
 
 }
