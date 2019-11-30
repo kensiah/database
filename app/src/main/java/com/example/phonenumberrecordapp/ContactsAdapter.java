@@ -32,7 +32,7 @@ public class ContactsAdapter extends ArrayAdapter {
 
     @Override
     public int getCount(){
-        return super.getCount();
+        return data.size();
     }
 
     @NonNull
